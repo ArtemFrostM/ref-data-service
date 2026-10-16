@@ -33,10 +33,10 @@ COPY --from=build /workspace/build/libs/*.jar app.jar
 
 USER 10001
 
-EXPOSE 8380
+EXPOSE 8381
 
 HEALTHCHECK --interval=10s --timeout=3s --retries=5 --start-period=40s \
-  CMD curl -fsS http://localhost:8380/actuator/health || exit 1
+  CMD curl -fsS http://localhost:8381/actuator/health || exit 1
 
 ENTRYPOINT ["java", \
   "-XX:MaxRAMPercentage=75.0", \
