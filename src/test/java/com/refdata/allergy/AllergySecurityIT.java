@@ -118,4 +118,12 @@ class AllergySecurityIT extends BaseIntegrationTest {
         mockMvc.perform(get("/actuator/health"))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    @DisplayName("GET /lookup with allergy:read -> 200, without token -> 401")
+    void lookupRequiresReadScope() throws Exception {
+        String url = BASE_URL + "/lookup?ids=" + UUID.randomUUID();
+        mockMvc.perform(get(url)).andExpect(status().isUnauthorized());
+        mockMvc.perform(get(url).with(readToken())).andExpect(status().isOk());
+    }
 }
