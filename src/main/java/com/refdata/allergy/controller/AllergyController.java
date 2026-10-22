@@ -5,12 +5,16 @@ import com.refdata.allergy.dto.AllergyResponse;
 import com.refdata.allergy.dto.AllergyUpdateRequest;
 import com.refdata.allergy.service.AllergyService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -31,6 +35,11 @@ public class AllergyController {
     @GetMapping("/{id}")
     public AllergyResponse findById(@PathVariable UUID id) {
         return service.findById(id);
+    }
+
+    @GetMapping("/lookup")
+    public List<AllergyResponse> findAllByIds(@RequestParam @NotEmpty @Size(max = 100) Set<UUID> ids) {
+        return service.findAllByIds(ids);
     }
 
     @PostMapping
