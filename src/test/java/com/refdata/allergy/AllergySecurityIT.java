@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Verifies the per-endpoint read/write rules of {@code SecurityConfig}.
+ * Verifies the per-endpoint read/write rules ({@code @PreAuthorize} on {@code AllergyController}).
  *
  * <p>Tokens are faked with {@code jwt()}: the request is treated as already authenticated with the
  * given authorities, bypassing signature validation. So no Keycloak is needed here: we test our
